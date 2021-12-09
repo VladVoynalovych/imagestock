@@ -1,9 +1,10 @@
-@import "fonts.scss";
-@import "main.scss";
-@import "variables.scss";
+@import "fonts";
+@import "main";
+@import "variables";
 
 //layouts
-@import "../layouts/MainLayout/MainLayout.scss";
+@import "../layouts/MainLayout/MainLayout";
 
 //components
-@import "../Header/Header.scss";
+@import "../Components/Header/Header";
+@import "../Components/Grid/Grid";

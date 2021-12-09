@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  grid-template-rows: repeat(3, 29.7%);
+  grid-template-columns: repeat(4, 24.2%);
+  gap: 10px;
+  width: 974px;
+  height: 673px;
+  margin-top: 11px;
+}
+
+.grid::-webkit-scrollbar {
+  background-color: #d1dae3;
+  width: 10px;
+  border-radius: 8px;
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background-color: #21b8c6;
+  border-radius: 8px;
+}
