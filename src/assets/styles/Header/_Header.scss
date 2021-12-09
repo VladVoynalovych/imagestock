@@ -1,0 +1,18 @@
+.header {
+  width: fit-content;
+  height: fit-content;
+
+  .header__innerText {
+    font: 700 24px OpenSans;
+    color: $brand-colour--1;
+
+    span {
+      color: $brand-colour--2;
+    }
+  }
+
+}
+
+
+
+
