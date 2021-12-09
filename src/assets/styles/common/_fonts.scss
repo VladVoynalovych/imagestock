@@ -1,0 +1,22 @@
+@import "variables";
+
+@font-face {
+  font-family: "OpenSans";
+  src: url('~@/assets/fonts/OpenSans/OpenSans-Regular.woff') format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url('~@/assets/fonts/OpenSans/OpenSans-SemiBold.woff') format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url('~@/assets/fonts/OpenSans/OpenSans-Bold.woff') format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
