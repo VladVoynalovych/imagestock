@@ -1,8 +1,11 @@
 <template lang="pug">
-  .imagePopup
+  .imagePopup(v-show="opened")
     .imagePopup__popupContent
       .imagePopup__contentWrapper
-        img.imagePopup__closeButton(src='~@/assets/media/images/ImagePopup/close_icon.png')
+        img.imagePopup__closeButton(
+            src='~@/assets/media/images/ImagePopup/close_icon.png'
+            @click="close"
+          )
         .imagePopup__imageWrapper
           img.imagePopup__image(src='~@/assets/media/images/ciri.jpg')
           .imagePopup__statsWrapper.border-box
@@ -74,10 +77,17 @@
 
 </template>
 
-<script>
-export default {
-  name: 'ImagePopup',
-};
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+  @Component
+export default class ImagePopup extends Vue {
+    @Prop() private opened!: boolean;
+
+    close():void {
+      this.opened = !this.opened;
+    }
+}
 </script>
 
 <style scoped>

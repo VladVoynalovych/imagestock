@@ -2,18 +2,18 @@
   .mainLayout
     Header
     Grid
-      GridItem
-      GridItem
-      GridItem
-      GridItem
-      GridItem
-      GridItem
-      GridItem
-      GridItem
-      GridItem
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
+      GridItem(@click.native="popupOpened = !popupOpened")
       AddButton
 
-    ImagePopup
+    ImagePopup(:opened.sync="popupOpened")
 </template>
 
 <script lang="ts">
@@ -34,6 +34,7 @@ import ImagePopup from '../../components/ImagePopup/ImagePopup.vue';
   },
 })
 export default class MainLayout extends Vue {
+  private popupOpened = false;
 }
 </script>
 
