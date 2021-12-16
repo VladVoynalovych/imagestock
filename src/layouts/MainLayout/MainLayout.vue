@@ -11,8 +11,9 @@
       GridItem
       GridItem
       GridItem
-
       AddButton
+
+    ImagePopup
 </template>
 
 <script lang="ts">
@@ -21,6 +22,7 @@ import Header from '../../components/Header/Header.vue';
 import Grid from '../../components/Grid/Grid.vue';
 import GridItem from '../../components/GridItem/GridItem.vue';
 import AddButton from '../../components/AddButton/AddButton.vue';
+import ImagePopup from '../../components/ImagePopup/ImagePopup.vue';
 
 @Component({
   components: {
@@ -28,6 +30,7 @@ import AddButton from '../../components/AddButton/AddButton.vue';
     Grid,
     GridItem,
     AddButton,
+    ImagePopup,
   },
 })
 export default class MainLayout extends Vue {

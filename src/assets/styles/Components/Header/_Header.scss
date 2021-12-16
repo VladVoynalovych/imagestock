@@ -1,7 +1,9 @@
 .header {
+  position: relative;
   width: fit-content;
   height: fit-content;
   margin-left: 25px;
+  z-index: 2;
 
   .header__innerText {
     font: 700 24px OpenSans;
