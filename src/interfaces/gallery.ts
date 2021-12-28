@@ -1,13 +1,14 @@
-export interface userComment {
+export interface IUserComment {
   userName: string,
   date: Date,
-  comments: Array<userComment>
+  text: string
 }
 
 export interface IGalleryItem {
+  src: string,
   likes: number,
   dislikes: number,
-  comments: Array<userComment>
+  comments: Array<IUserComment>
 }
 
 export interface IGalleryState {
