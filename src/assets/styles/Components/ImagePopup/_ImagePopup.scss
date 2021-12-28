@@ -207,6 +207,11 @@
   border-bottom: 2px solid $comment-border-colour;
   font: 400 14px OpenSans;
   letter-spacing: 0.2px;
+  outline: none;
+
+  &:focus {
+    border-bottom: 2px solid $comment-border-focused-colour;
+  }
 }
 
 .imagePopup__commentArea {
