@@ -47,9 +47,9 @@
 </template>
 
 <script lang="ts">
-import { getDateString } from 'auxiliary-functions';
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import moment from 'moment';
 import { IUserComment } from '@/interfaces/gallery';
 import { galleryActions } from '@/store/modules/gallery/publicConstants';
 
@@ -160,7 +160,7 @@ export default class ImagePopup extends Vue {
     }
 
     protected getDate(commentDate:Date):string {
-      return getDateString(new Date(commentDate));
+      return moment(commentDate.toString()).fromNow();
     }
 }
 </script>
