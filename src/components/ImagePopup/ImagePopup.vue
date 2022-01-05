@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { getDateString } from 'auxiliary-functions';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { IUserComment } from '@/interfaces/gallery';
 import { galleryActions } from '@/store/modules/gallery/publicConstants';
@@ -128,12 +128,13 @@ export default class ImagePopup extends Vue {
       this.updateLocalStorage();
     }
 
+    @Emit('close')
     close():void {
       this.userActivity = {
         isDisliked: false,
         isLiked: false,
       };
-      this.$emit('update:opened', false);
+      // this.$emit('update:opened', false);
     }
 
     clearInputs():void {

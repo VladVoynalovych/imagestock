@@ -21,6 +21,7 @@
         :comments="getAllImages[currentImageId].comments"
         :src="getAllImages[currentImageId].src"
         :itemIndex="currentImageId"
+        @close="popupOpened = false"
       )
 </template>
 
