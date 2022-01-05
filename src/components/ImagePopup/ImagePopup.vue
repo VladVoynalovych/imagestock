@@ -70,8 +70,8 @@ export default class ImagePopup extends Vue {
     @Prop({ default: () => [] }) private comments!: Array<IUserComment>;
 
     protected userActivity = {
-      isLiked: false,
-      isDisliked: false,
+      liked: false,
+      disliked: false,
     };
 
     protected userName = '';
@@ -97,42 +97,44 @@ export default class ImagePopup extends Vue {
     private commentIncrement!: (commentData:object) => void;
 
     protected like():void {
-      if (!this.userActivity.isDisliked) {
-        if (!this.userActivity.isLiked) {
-          this.userActivity.isLiked = !this.userActivity.isLiked;
-          this.likesIncrementation(this.itemIndex);
-        }
-      } else {
-        this.userActivity.isLiked = !this.userActivity.isLiked;
-        this.userActivity.isDisliked = !this.userActivity.isDisliked;
-        this.dislikesDecrement(this.itemIndex);
+      if (!this.userActivity.liked) {
         this.likesIncrementation(this.itemIndex);
+        this.userActivity.liked = !this.userActivity.liked;
       }
 
+      this.unDislike();
       this.updateLocalStorage();
     }
 
     protected dislike():void {
-      if (!this.userActivity.isLiked) {
-        if (!this.userActivity.isDisliked) {
-          this.userActivity.isDisliked = !this.userActivity.isDisliked;
-          this.dislikesIncrementation(this.itemIndex);
-        }
-      } else {
-        this.userActivity.isLiked = !this.userActivity.isLiked;
-        this.userActivity.isDisliked = !this.userActivity.isDisliked;
-        this.likesDecrement(this.itemIndex);
+      if (!this.userActivity.disliked) {
         this.dislikesIncrementation(this.itemIndex);
+        this.userActivity.disliked = !this.userActivity.disliked;
       }
 
+      this.unLike();
       this.updateLocalStorage();
+    }
+
+    protected unLike() {
+      if (this.userActivity.liked) {
+        this.likesDecrement(this.itemIndex);
+        this.userActivity.liked = !this.userActivity.liked;
+      }
+    }
+
+    protected unDislike() {
+      if (this.userActivity.disliked) {
+        this.dislikesDecrement(this.itemIndex);
+        this.userActivity.disliked = !this.userActivity.disliked;
+      }
     }
 
     @Emit('close')
     close():void {
       this.userActivity = {
-        isDisliked: false,
-        isLiked: false,
+        liked: false,
+        disliked: false,
       };
       // this.$emit('update:opened', false);
     }
