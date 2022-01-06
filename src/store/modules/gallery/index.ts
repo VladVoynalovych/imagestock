@@ -5,6 +5,8 @@ import {
 import { IRootState } from '@/interfaces/states';
 import { IGalleryState } from '@/interfaces/gallery';
 
+import flickrConfig from '@/configs/flickr';
+
 import {
   galleryGetters,
   galleryActions,
@@ -182,6 +184,25 @@ const actions: ActionTree<IGalleryState, IRootState> = {
   },
   [galleryActions.COMMENT_INCREMENT]: ({ commit }, payload) => {
     commit('ADD_COMMENT', payload);
+  },
+  [galleryActions.FLICKR_IMAGES]: ({ commit }) => {
+    const keyword = 'key';
+    const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
+    const params = `api_key=${flickrConfig.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=10`;
+    const images = [];
+    fetch(url + params)
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        res.photos.photo.forEach((photo) => {
+          const photoObj = {
+            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
+            title: photo.title,
+          };
+          images.push(photoObj);
+        });
+      });
   },
 };
 
