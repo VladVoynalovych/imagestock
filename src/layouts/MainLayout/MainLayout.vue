@@ -61,9 +61,6 @@ export default class MainLayout extends Vue {
   @galleryModule.Action(galleryActions.UPLOAD_IMAGES)
   private uploadImages!: () => void;
 
-  @galleryModule.Action(galleryActions.FLICKR_IMAGES)
-  private flickerImagesCheck!: () => void;
-
   @galleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
   private getAllImages!: Array<IGalleryItem>;
 
@@ -75,7 +72,6 @@ export default class MainLayout extends Vue {
 
   private mounted(): void {
     this.uploadImages();
-    this.flickerImagesCheck();
   }
 
   private openPopup(index:number): void {
