@@ -11,7 +11,9 @@
           :commentsCount="image.comments.length"
           @click.native="openPopup(index)"
       )
-      AddButton
+      AddButton(
+          @click.native="AddImagePopupOpened = !AddImagePopupOpened"
+      )
 
     ImagePopup(
         v-if="getAllImages[currentImageId]"
@@ -23,6 +25,10 @@
         :itemIndex="currentImageId"
         @close="popupOpened = false"
       )
+    AddImagePopup(
+        :opened.sync="AddImagePopupOpened"
+        @close="AddImagePopupOpened = !AddImagePopupOpened"
+    )
 </template>
 
 <script lang="ts">
@@ -33,6 +39,8 @@ import Grid from '../../components/Grid/Grid.vue';
 import GridItem from '../../components/GridItem/GridItem.vue';
 import AddButton from '../../components/AddButton/AddButton.vue';
 import ImagePopup from '../../components/ImagePopup/ImagePopup.vue';
+import AddImagePopup from '../../components/AddImagePopup/AddImagePopup.vue';
+
 import { galleryActions, galleryGetters } from '@/store/modules/gallery/publicConstants';
 
 import { IGalleryItem } from '@/interfaces/gallery';
@@ -46,6 +54,7 @@ const galleryModule = namespace('galleryModule');
     GridItem,
     AddButton,
     ImagePopup,
+    AddImagePopup,
   },
 })
 export default class MainLayout extends Vue {
@@ -59,6 +68,8 @@ export default class MainLayout extends Vue {
   private getAllImages!: Array<IGalleryItem>;
 
   private popupOpened = false;
+
+  private AddImagePopupOpened = false;
 
   private currentImageId = 0;
 
