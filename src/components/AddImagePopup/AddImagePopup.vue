@@ -67,9 +67,13 @@ export default class AddImagePopup extends Vue {
     private getAllImages!: Array<INewImage>;
 
     private uploadImages(keyWord:string):void {
-      this.uploadImagesAction(keyWord);
-      this.showDisclaimer = false;
-      this.keyWord = '';
+      if (keyWord !== '') {
+        this.uploadImagesAction(keyWord);
+        this.showDisclaimer = false;
+        this.keyWord = '';
+      } else {
+        alert('The search string shouldn`t be empty');
+      }
     }
 }
 </script>
