@@ -10,7 +10,6 @@ const METHODS = {
 };
 
 async function search(keyword: string): Promise<IPromise> {
-  debugger;
   const reqBody = `api_key=${flickrConfig.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=10`;
 
   const reqResult = await axios.get(`${REQUEST_URL}${METHODS.SEARCH}&${reqBody}`);
