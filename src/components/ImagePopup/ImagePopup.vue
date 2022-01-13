@@ -1,11 +1,11 @@
 <template lang="pug">
-  .imagePopup(v-show="opened")
-    .imagePopup__popupContent
+  .popup(v-show="opened")
+    .popup__popupContent
+      img.popup__closeButton(
+        src='~@/assets/media/images/ImagePopup/close_icon.png'
+        @click="close"
+      )
       .imagePopup__contentWrapper
-        img.imagePopup__closeButton(
-            src='~@/assets/media/images/ImagePopup/close_icon.png'
-            @click="close"
-          )
         .imagePopup__imageWrapper
           img.imagePopup__image(:src="src")
           .imagePopup__statsWrapper.border-box

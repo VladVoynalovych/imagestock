@@ -1,4 +1,4 @@
-.imagePopup {
+.popup {
   position: absolute;
   top: 0;
   left: 0;
@@ -6,7 +6,7 @@
   height: 768px;
   background: $popup-overlay;
 
-  .imagePopup__popupContent {
+  .popup__popupContent {
     position: absolute;
     left: 107px;
     top: 95px;
@@ -19,7 +19,7 @@
   }
 }
 
-.imagePopup__closeButton {
+.popup__closeButton {
   position: absolute;
   top: 12px;
   right: 12px;
