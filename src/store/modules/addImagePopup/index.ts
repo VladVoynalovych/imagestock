@@ -5,10 +5,12 @@ import {
 import { IRootState } from '@/interfaces/states';
 import { IAddImagePopupState } from '@/interfaces/addImagePopup';
 
+import { uploadImages } from '@/services/Flicker/FlickrService';
+
 import {
-  galleryGetters,
-  galleryActions,
-  galleryMutations,
+  popupGetters,
+  popupActions,
+  popupMutations,
 } from './publicConstants';
 
 const state: IAddImagePopupState = {
@@ -16,18 +18,29 @@ const state: IAddImagePopupState = {
 };
 
 const getters: GetterTree<IAddImagePopupState, IRootState> = {
-
+  [popupGetters.GET_UPLOADED_IMAGES]: state => state.images,
 };
 
 const actions: ActionTree<IAddImagePopupState, IRootState> = {
-
+  [popupActions.UPLOAD_IMAGES]: async ({ commit }, payload) => {
+    const images = await uploadImages(payload);
+    commit('RENEW_IMAGES', images);
+  },
+  [popupActions.CLEAR_IMAGES_POPUP]: ({ commit }) => {
+    commit('CLEAR_IMAGES');
+  },
 };
 
 const mutations: MutationTree<IAddImagePopupState> = {
-
+  [popupMutations.RENEW_IMAGES]: (state, payload) => {
+    state.images = payload;
+  },
+  [popupMutations.CLEAR_IMAGES]: (state) => {
+    state.images = [];
+  },
 };
 
-const galleryModule: Module<IAddImagePopupState, IRootState> = {
+const addImagePopupModule: Module<IAddImagePopupState, IRootState> = {
   state,
   getters,
   mutations,
@@ -35,4 +48,4 @@ const galleryModule: Module<IAddImagePopupState, IRootState> = {
   namespaced: true,
 };
 
-export default galleryModule;
+export default addImagePopupModule;
