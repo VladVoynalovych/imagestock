@@ -1,5 +1,6 @@
 export interface INewImage {
-  src: string
+  src: String,
+  added: Boolean
 }
 
 export interface IAddImagePopupState {
