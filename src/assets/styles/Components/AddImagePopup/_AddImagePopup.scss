@@ -60,14 +60,38 @@
 }
 
 .addImagePopup__imageContainer {
+  position: relative;
   width: 152px;
   height: 152px;
   margin-left: 16px;
+  margin-bottom: 3px;
   overflow: hidden;
 
-  img {
+  .addImagePopup__image {
     width: 100%;
     height: auto;
-    transform: scale(2);
+  }
+
+  .plusButton {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    transition: 0.5s opacity;
+  }
+
+  &:hover .plusButton {
+    opacity: 1;
+  }
+
+  &.addImagePopup__imageContainer_alreadyAdded {
+    border: 2px solid $comment-border-focused-colour;
+    pointer-events: none;
+  }
+
+  &.addImagePopup__imageContainer_newAdded {
+    border: 2px solid $dislike-button;
   }
 }
