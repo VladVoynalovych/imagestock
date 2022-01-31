@@ -1,5 +1,6 @@
 export interface INewImage {
   src: string;
+  added: boolean
 }
 
 export interface IImageData {
