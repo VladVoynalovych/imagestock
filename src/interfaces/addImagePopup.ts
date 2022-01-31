@@ -1,8 +1,8 @@
 export interface INewImage {
-  src: String,
-  added: Boolean
+  src: string,
+  added: boolean;
 }
 
 export interface IAddImagePopupState {
-  images: Array<INewImage>
+  images: Array<INewImage>;
 }

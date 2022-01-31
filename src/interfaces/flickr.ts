@@ -1,17 +1,17 @@
 export interface INewImage {
-  src: String,
+  src: string;
 }
 
 export interface IImageData {
-  farm: Number,
-  id: String,
-  isfamily: Number,
-  isfriend: Number,
-  ispublic: Number,
-  owner: String,
-  secret: String,
-  server: String,
-  title: String,
+  farm: number,
+  id: string,
+  isfamily: number,
+  isfriend: number,
+  ispublic: number,
+  owner: string,
+  secret: string,
+  server: string,
+  title: string;
 }
 
 export interface IPromise {

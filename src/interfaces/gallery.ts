@@ -1,3 +1,8 @@
+export interface IImageActivity {
+  liked: boolean,
+  disliked: boolean;
+}
+
 export interface IUserComment {
   userName: string,
   date: Date,
