@@ -27,7 +27,7 @@
       )
     AddImagePopup(
         :opened.sync="addImagePopupOpened"
-        @close="AddImagePopupOpened = !AddImagePopupOpened"
+        @close="addImagePopupOpened = !addImagePopupOpened"
     )
 </template>
 
