@@ -183,6 +183,9 @@ const actions: ActionTree<IGalleryState, IRootState> = {
   [galleryActions.COMMENT_INCREMENT]: ({ commit }, payload) => {
     commit('ADD_COMMENT', payload);
   },
+  [galleryActions.ADD_IMAGE_TO_GALLERY]: ({ commit }, payload) => {
+    commit('ADD_IMAGE', payload);
+  },
 };
 
 const mutations: MutationTree<IGalleryState> = {
@@ -203,6 +206,14 @@ const mutations: MutationTree<IGalleryState> = {
   },
   [galleryMutations.ADD_COMMENT]: (state, payload) => {
     state.images[payload.itemIndex].comments.push(payload.comment);
+  },
+  [galleryMutations.ADD_IMAGE]: (state, payload) => {
+    state.images.push({
+      likes: 0,
+      dislikes: 0,
+      comments: [],
+      src: payload,
+    });
   },
 };
 
