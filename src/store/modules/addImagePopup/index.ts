@@ -42,7 +42,7 @@ const mutations: MutationTree<IAddImagePopupState> = {
     state.images = [];
   },
   [popupMutations.ADD_IMAGE]: (state, payload) => {
-    state.images[payload].added = true;
+    state.images[payload].added = !state.images[payload].added;
   },
 };
 
