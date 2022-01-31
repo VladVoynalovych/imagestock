@@ -10,12 +10,12 @@
           img.imagePopup__image(:src="src")
           .imagePopup__statsWrapper.border-box
             .imagePopup__buttonsWrapper
-              .imagePopup__statBtn.imagePopup__dislike.border-box(@click="dislike")
-                .imagePopup__btnIcon.imagePopup__iconDislike
-                  .imagePopup__btnTextWrapper {{ dislikesCount }}
-              .imagePopup__statBtn.imagePopup__like.border-box(@click="like")
-                .imagePopup__btnIcon.imagePopup__iconLike
-                  .imagePopup__btnTextWrapper {{ likesCount }}
+              .statBtn.dislike.border-box(@click="dislike")
+                .statBtn__btnIcon.statBtn__iconDislike
+                  .statBtn__btnTextWrapper {{ dislikesCount }}
+              .statBtn.like.border-box(@click="like")
+                .statBtn__btnIcon.statBtn__iconLike
+                  .statBtn__btnTextWrapper {{ likesCount }}
 
         .imagePopup__commentsWrapper.border-box
           .imagePopup__commentsCount Comments: {{ comments.length ? comments.length : 0 }}
@@ -50,7 +50,7 @@
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import moment from 'moment';
-import { IUserComment } from '@/interfaces/gallery';
+import { IUserComment, IImageActivity } from '@/interfaces/gallery';
 import { galleryActions } from '@/store/modules/gallery/publicConstants';
 
 const galleryModule = namespace('galleryModule');
@@ -69,14 +69,14 @@ export default class ImagePopup extends Vue {
 
     @Prop({ default: () => [] }) private comments!: Array<IUserComment>;
 
-    protected userActivity = {
+    protected userActivity:IImageActivity = {
       liked: false,
       disliked: false,
     };
 
-    protected userName = '';
+    protected userName:string = '';
 
-    protected commentText = '';
+    protected commentText:string = '';
 
     @galleryModule.Action(galleryActions.LIKES_INCREMENTATION)
     private likesIncrementation!: (index:number) => void;
@@ -131,7 +131,7 @@ export default class ImagePopup extends Vue {
     }
 
     @Emit('close')
-    close():void {
+    private close():void {
       this.userActivity = {
         liked: false,
         disliked: false,
@@ -139,12 +139,12 @@ export default class ImagePopup extends Vue {
       // this.$emit('update:opened', false);
     }
 
-    clearInputs():void {
+    private clearInputs():void {
       this.userName = '';
       this.commentText = '';
     }
 
-    sendComment():void {
+    private sendComment():void {
       const commentData = {
         itemIndex: this.itemIndex,
         comment: {
