@@ -12,7 +12,7 @@
           @click.native="openPopup(index)"
       )
       AddButton(
-          @click.native="AddImagePopupOpened = !AddImagePopupOpened"
+          @click.native="addImagePopupOpened = !addImagePopupOpened"
       )
 
     ImagePopup(
@@ -26,7 +26,7 @@
         @close="popupOpened = false"
       )
     AddImagePopup(
-        :opened.sync="AddImagePopupOpened"
+        :opened.sync="addImagePopupOpened"
         @close="AddImagePopupOpened = !AddImagePopupOpened"
     )
 </template>
@@ -64,11 +64,11 @@ export default class MainLayout extends Vue {
   @galleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
   private getAllImages!: Array<IGalleryItem>;
 
-  private popupOpened = false;
+  private popupOpened:boolean = false;
 
-  private AddImagePopupOpened = false;
+  private addImagePopupOpened:boolean = false;
 
-  private currentImageId = 0;
+  private currentImageId:number = 0;
 
   private mounted(): void {
     this.uploadImages();
