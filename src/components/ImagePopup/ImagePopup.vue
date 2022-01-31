@@ -18,7 +18,7 @@
                   .imagePopup__btnTextWrapper {{ likesCount }}
 
         .imagePopup__commentsWrapper.border-box
-          .imagePopup__commentsCount(v-if="comments.length > 0") Comments: {{ comments.length }}
+          .imagePopup__commentsCount Comments: {{ comments.length ? comments.length : 0 }}
           .imagePopup__commentsScroll
             .imagePopup__commentWrapper(
                 v-for="(comment, index) in comments"
