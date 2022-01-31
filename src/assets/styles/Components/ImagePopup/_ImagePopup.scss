@@ -76,7 +76,7 @@
   }
 }
 
-.imagePopup__statBtn {
+.statBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,23 +84,23 @@
   height: 100%;
   background: $default-button;
 
-  &.imagePopup__dislike:active {
+  &.dislike:active {
     transform: translateY(7px);
     background: $dislike-button;
   }
 
-  &.imagePopup__like:active {
+  &.like:active {
     transform: translateY(7px);
     background: $like-button;
   }
 }
 
-.imagePopup__btnIcon {
+.statBtn__btnIcon {
   position: relative;
   width: 34px;
   height: 29px;
 
-  .imagePopup__btnTextWrapper {
+  .statBtn__btnTextWrapper {
     position: absolute;
     top: 2px;
     left: 20px;
@@ -115,12 +115,12 @@
   }
 }
 
-.imagePopup__iconDislike {
+.statBtn__iconDislike {
   background: url("~@/assets/media/images/ImagePopup/dislike_icon.png")
               center center/contain no-repeat;
 }
 
-.imagePopup__iconLike {
+.statBtn__iconLike {
   background: url("~@/assets/media/images/ImagePopup/like_icon.png")
   center center/contain no-repeat;
 }
