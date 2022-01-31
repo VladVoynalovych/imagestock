@@ -29,6 +29,9 @@ const actions: ActionTree<IAddImagePopupState, IRootState> = {
   [popupActions.CLEAR_IMAGES_POPUP]: ({ commit }) => {
     commit('CLEAR_IMAGES');
   },
+  [popupActions.SET_AS_ADDED]: ({ commit }, payload) => {
+    commit('ADD_IMAGE', payload);
+  },
 };
 
 const mutations: MutationTree<IAddImagePopupState> = {
@@ -37,6 +40,9 @@ const mutations: MutationTree<IAddImagePopupState> = {
   },
   [popupMutations.CLEAR_IMAGES]: (state) => {
     state.images = [];
+  },
+  [popupMutations.ADD_IMAGE]: (state, payload) => {
+    state.images[payload].added = true;
   },
 };
 
