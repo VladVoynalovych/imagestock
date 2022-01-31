@@ -86,12 +86,12 @@
     opacity: 1;
   }
 
-  &.addImagePopup__imageContainer_alreadyAdded {
+  &.alreadyAdded {
     border: 2px solid $comment-border-focused-colour;
     pointer-events: none;
   }
 
-  &.addImagePopup__imageContainer_newAdded {
+  &.newAdded {
     border: 2px solid $dislike-button;
   }
 }

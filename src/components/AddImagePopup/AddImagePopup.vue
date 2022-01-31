@@ -24,7 +24,7 @@
         .addImagePopup__imageContainer.border-box(
           v-if="getAllImages.length"
           v-for="(item, index) in getAllImages"
-          :class="{'addImagePopup__imageContainer_alreadyAdded': isBelongToGallery(item.src),'addImagePopup__imageContainer_newAdded': item.added }"
+          :class="{'alreadyAdded': isBelongToGallery(item.src) && !item.added,'newAdded': item.added}"
         )
           img(
             :src='item.src'
@@ -34,7 +34,7 @@
           img(
             src='~@/assets/media/images/AddButton/plus_icon.png'
             class='plusButton'
-            @click.once="addImage(item.src, index)"
+            @click="addImage(item.src, index)"
           )
       img.popup__closeButton(
         src='~@/assets/media/images/ImagePopup/close_icon.png'
@@ -90,6 +90,9 @@ export default class AddImagePopup extends Vue {
 
     @galleryModule.Action(galleryActions.UPDATE_LOCAL_STORAGE)
     private updateLocalStorage!: () => void;
+
+    @galleryModule.Action(galleryActions.DELETE_IMAGE_BY_SRC)
+    private deleteImageBySrc!: (src: string) => void;
     // gallery module functionality
 
     private uploadImages(keyWord:string):void {
@@ -104,8 +107,13 @@ export default class AddImagePopup extends Vue {
     }
 
     private addImage(src:string, index:number):void {
-      this.addImageToGallery(src);
-      this.setAsAdded(index);
+      if (!this.getAllImages[index].added) {
+        this.addImageToGallery(src);
+        this.setAsAdded(index);
+      } else {
+        this.deleteImageBySrc(src);
+        this.setAsAdded(index);
+      }
       this.updateLocalStorage();
     }
 
