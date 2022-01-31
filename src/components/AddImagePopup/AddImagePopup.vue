@@ -1,13 +1,13 @@
 <template lang="pug">
   .popup.addImagePopup(v-show="opened")
     .popup__popupContent.border-box
-      .addImagePopup__searchPoleWrapper
-        input.addImagePopup__searchPole(
+      .addImagePopup__searchFieldWrapper
+        input.searchField(
           type="text"
           placeholder="Type your image name here..."
           v-model="keyWord"
         )
-        button.addImagePopup__searchButton(
+        button.searchButton(
           @click="uploadImages(keyWord)"
         )
           i(
@@ -60,14 +60,14 @@ export default class AddImagePopup extends Vue {
     @Prop() private opened!: boolean;
 
     @Emit('close')
-    close():boolean {
+    private close():boolean {
       this.clearImages();
       return false;
     }
 
-    protected showDisclaimer = true;
+    protected showDisclaimer:boolean = true;
 
-    protected keyWord = '';
+    protected keyWord:string = '';
 
     @addImagePopupModule.Action(popupActions.UPLOAD_IMAGES)
     private uploadImagesAction!: (keyWord:string) => void;
@@ -93,13 +93,14 @@ export default class AddImagePopup extends Vue {
     // gallery module functionality
 
     private uploadImages(keyWord:string):void {
-      if (keyWord !== '') {
-        this.uploadImagesAction(keyWord);
-        this.showDisclaimer = false;
-        this.keyWord = '';
-      } else {
+      if (!keyWord) {
         alert('The search string shouldn`t be empty');
+        return;
       }
+
+      this.uploadImagesAction(keyWord);
+      this.showDisclaimer = false;
+      this.keyWord = '';
     }
 
     private addImage(src:string, index:number):void {
