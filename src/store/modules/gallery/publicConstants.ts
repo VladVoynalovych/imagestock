@@ -13,6 +13,7 @@ export const galleryActions = {
   UPDATE_LOCAL_STORAGE: 'UPDATE_LOCAL_STORAGE',
   COMMENT_INCREMENT: 'COMMENT_INCREMENT',
   FLICKR_IMAGES: 'FLICKR_IMAGES',
+  DELETE_IMAGE_BY_SRC: 'DELETE_IMAGE_BY_SRC',
 };
 
 export const galleryMutations = {
@@ -23,4 +24,5 @@ export const galleryMutations = {
   ADD_COMMENT: 'ADD_COMMENT',
   FILL_IMAGES: 'FILL_IMAGES',
   ADD_IMAGE: 'ADD_IMAGE',
+  DELETE_IMAGE: 'DELETE_IMAGE',
 };
