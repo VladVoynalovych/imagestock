@@ -93,5 +93,9 @@
 
   &.newAdded {
     border: 2px solid $dislike-button;
+
+    .plusButton {
+      transform: rotate(45deg);
+    }
   }
 }
