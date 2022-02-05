@@ -9,6 +9,7 @@
           :likesCount="image.likes"
           :dislikesCount="image.dislikes"
           :commentsCount="image.comments.length"
+          :itemId="index"
           @click.native="openPopup(index)"
       )
       AddButton(
