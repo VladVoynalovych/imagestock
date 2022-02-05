@@ -51,51 +51,51 @@ import { galleryActions, galleryGetters } from '@/store/modules/gallery/publicCo
 import { INewImage } from '@/interfaces/flickr';
 import { IGalleryItem } from '@/interfaces/gallery';
 
-const addImagePopupModule = namespace('addImagePopupModule');
+const AddImagePopupModule = namespace('addImagePopupModule');
 
-const galleryModule = namespace('galleryModule');
+const GalleryModule = namespace('galleryModule');
 
   @Component
 export default class AddImagePopup extends Vue {
     @Prop() private opened!: boolean;
 
     @Emit('close')
-    private close():boolean {
+    private close(): boolean {
       this.clearImages();
       return false;
     }
 
-    protected showDisclaimer:boolean = true;
+    protected showDisclaimer: boolean = true;
 
     protected keyWord:string = '';
 
-    @addImagePopupModule.Action(popupActions.UPLOAD_IMAGES)
-    private uploadImagesAction!: (keyWord:string) => void;
+    @AddImagePopupModule.Action(popupActions.UPLOAD_IMAGES)
+    private uploadImagesAction!: (keyWord: string) => void;
 
-    @addImagePopupModule.Action(popupActions.CLEAR_IMAGES_POPUP)
+    @AddImagePopupModule.Action(popupActions.CLEAR_IMAGES_POPUP)
     private clearImages!: () => void;
 
-    @addImagePopupModule.Action(popupActions.SET_AS_ADDED)
-    private setAsAdded!: (id:number) => void;
+    @AddImagePopupModule.Action(popupActions.SET_AS_ADDED)
+    private setAsAdded!: (id: number) => void;
 
-    @addImagePopupModule.Getter(popupGetters.GET_UPLOADED_IMAGES)
-    private getAllImages!: Array<INewImage>;
+    @AddImagePopupModule.Getter(popupGetters.GET_UPLOADED_IMAGES)
+    private getAllImages!: INewImage[];
 
     // gallery module functionality
-    @galleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
-    private getAllGalleryImages!: Array<IGalleryItem>;
+    @GalleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
+    private getAllGalleryImages!: IGalleryItem[];
 
-    @galleryModule.Action(galleryActions.ADD_IMAGE_TO_GALLERY)
-    private addImageToGallery!: (src:string) => void;
+    @GalleryModule.Action(galleryActions.ADD_IMAGE_TO_GALLERY)
+    private addImageToGallery!: (src: string) => void;
 
-    @galleryModule.Action(galleryActions.UPDATE_LOCAL_STORAGE)
+    @GalleryModule.Action(galleryActions.UPDATE_LOCAL_STORAGE)
     private updateLocalStorage!: () => void;
 
-    @galleryModule.Action(galleryActions.DELETE_IMAGE_BY_SRC)
+    @GalleryModule.Action(galleryActions.DELETE_IMAGE_BY_SRC)
     private deleteImageBySrc!: (src: string) => void;
     // gallery module functionality
 
-    private uploadImages(keyWord:string):void {
+    private uploadImages(keyWord: string): void {
       if (!keyWord) {
         alert('The search string shouldn`t be empty');
         return;
@@ -106,7 +106,7 @@ export default class AddImagePopup extends Vue {
       this.keyWord = '';
     }
 
-    private addImage(src:string, index:number):void {
+    private addImage(src: string, index: number): void {
       if (!this.getAllImages[index].added) {
         this.addImageToGallery(src);
         this.setAsAdded(index);
@@ -117,7 +117,7 @@ export default class AddImagePopup extends Vue {
       this.updateLocalStorage();
     }
 
-    private isBelongToGallery(src:string) {
+    private isBelongToGallery(src: string) {
       return !!this.getAllGalleryImages.find(item => item.src === src);
     }
 }
