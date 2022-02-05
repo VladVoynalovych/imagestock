@@ -1,15 +1,36 @@
 .addImagePopup {
-  .popup__popupContent {
-    padding: 78px 26px;
+  .popup {
+    &__popupContent {
+      padding: 78px 26px;
+    }
   }
-}
 
-.addImagePopup__searchFieldWrapper {
-  display: flex;
-  width: 50%;
-  height: 30px;
-  margin: auto;
+  &__searchFieldWrapper {
+    display: flex;
+    width: 50%;
+    height: 30px;
+    margin: auto;
+  }
 
+  &__imagesWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    padding: 0px 35px;
+    margin-top: 20px;
+
+    &_centered {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__disclaimer {
+    font: 600 20px OpenSans;
+  }
 }
 
 .searchField {
@@ -37,26 +58,6 @@
   .fa-search {
     color: #ffffff;
   }
-}
-
-.addImagePopup__imagesWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-  padding: 0px 35px;
-  margin-top: 20px;
-}
-
-.addImagePopup__imagesWrapper_centered {
-  align-items: center;
-  justify-content: center;
-}
-
-.addImagePopup__disclaimer {
-  font: 600 20px OpenSans;
 }
 
 .addImagePopup__imageContainer {
