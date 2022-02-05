@@ -69,9 +69,12 @@
   }
 
   .gridItem__dislikes {
-    margin-left: auto;
-    margin-right: 20px;
     background: url("~@/assets/media/images/GridItem/dislike_icon.png")
+    center center/contain no-repeat;
+  }
+
+  .gridItem__delete {
+    background: url("~@/assets/media/images/GridItem/trash.png")
     center center/contain no-repeat;
   }
 
