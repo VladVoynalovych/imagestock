@@ -46,7 +46,7 @@ import { galleryActions, galleryGetters } from '@/store/modules/gallery/publicCo
 
 import { IGalleryItem } from '@/interfaces/gallery';
 
-const galleryModule = namespace('galleryModule');
+const GalleryModule = namespace('galleryModule');
 
 @Component({
   components: {
@@ -59,23 +59,23 @@ const galleryModule = namespace('galleryModule');
   },
 })
 export default class MainLayout extends Vue {
-  @galleryModule.Action(galleryActions.UPLOAD_IMAGES)
+  @GalleryModule.Action(galleryActions.UPLOAD_IMAGES)
   private uploadImages!: () => void;
 
-  @galleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
-  private getAllImages!: Array<IGalleryItem>;
+  @GalleryModule.Getter(galleryGetters.GET_ALL_IMAGES)
+  private getAllImages!: IGalleryItem[];
 
-  private popupOpened:boolean = false;
+  private popupOpened: boolean = false;
 
-  private addImagePopupOpened:boolean = false;
+  private addImagePopupOpened: boolean = false;
 
-  private currentImageId:number = 0;
+  private currentImageId: number = 0;
 
   private mounted(): void {
     this.uploadImages();
   }
 
-  private openPopup(index:number): void {
+  private openPopup(index: number): void {
     this.currentImageId = index;
     this.popupOpened = !this.popupOpened;
   }
