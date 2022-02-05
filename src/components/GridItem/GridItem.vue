@@ -7,13 +7,13 @@
         )
 
       .gridItem__comments.gridItem__icon
-        .gridItem__valueWrapper {{ likesCount }}
+        .gridItem__valueWrapper {{  commentsCount }}
 
       .gridItem__dislikes.gridItem__icon
         .gridItem__valueWrapper {{ dislikesCount }}
 
       .gridItem__likes.gridItem__icon
-        .gridItem__valueWrapper {{ commentsCount }}
+        .gridItem__valueWrapper {{ likesCount }}
 
 </template>
 
