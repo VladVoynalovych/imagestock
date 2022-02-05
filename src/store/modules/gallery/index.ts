@@ -189,6 +189,10 @@ const actions: ActionTree<IGalleryState, IRootState> = {
   [galleryActions.DELETE_IMAGE_BY_SRC]: ({ commit }, payload) => {
     commit('DELETE_IMAGE', payload);
   },
+  [galleryActions.DELETE_BY_ID]: ({ commit }, payload) => {
+    commit('DELETE', payload);
+    console.log('hi');
+  },
 };
 
 const mutations: MutationTree<IGalleryState> = {
@@ -221,6 +225,9 @@ const mutations: MutationTree<IGalleryState> = {
   [galleryMutations.DELETE_IMAGE]: (state, payload) => {
     const index = state.images.findIndex(item => item.src === payload);
     state.images.splice(index, 1);
+  },
+  [galleryMutations.DELETE]: (state, payload) => {
+    state.images.splice(payload, 1);
   },
 };
 

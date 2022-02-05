@@ -14,6 +14,7 @@ export const galleryActions = {
   COMMENT_INCREMENT: 'COMMENT_INCREMENT',
   FLICKR_IMAGES: 'FLICKR_IMAGES',
   DELETE_IMAGE_BY_SRC: 'DELETE_IMAGE_BY_SRC',
+  DELETE_BY_ID: 'DELETE_BY_ID',
 };
 
 export const galleryMutations = {
@@ -25,4 +26,5 @@ export const galleryMutations = {
   FILL_IMAGES: 'FILL_IMAGES',
   ADD_IMAGE: 'ADD_IMAGE',
   DELETE_IMAGE: 'DELETE_IMAGE',
+  DELETE: 'DELETE',
 };
