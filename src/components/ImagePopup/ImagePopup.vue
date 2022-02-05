@@ -53,7 +53,7 @@ import moment from 'moment';
 import { IUserComment, IImageActivity } from '@/interfaces/gallery';
 import { galleryActions } from '@/store/modules/gallery/publicConstants';
 
-const galleryModule = namespace('galleryModule');
+const GalleryModule = namespace('galleryModule');
 
   @Component
 export default class ImagePopup extends Vue {
@@ -67,36 +67,36 @@ export default class ImagePopup extends Vue {
 
     @Prop({ default: 0 }) private dislikesCount!: number;
 
-    @Prop({ default: () => [] }) private comments!: Array<IUserComment>;
+    @Prop({ default: () => [] }) private comments!: IUserComment[];
 
-    protected userActivity:IImageActivity = {
+    protected userActivity: IImageActivity = {
       liked: false,
       disliked: false,
     };
 
-    protected userName:string = '';
+    protected userName: string = '';
 
-    protected commentText:string = '';
+    protected commentText: string = '';
 
-    @galleryModule.Action(galleryActions.LIKES_INCREMENTATION)
-    private likesIncrementation!: (index:number) => void;
+    @GalleryModule.Action(galleryActions.LIKES_INCREMENTATION)
+    private likesIncrementation!: (index: number) => void;
 
-    @galleryModule.Action(galleryActions.DISLIKES_INCREMENTATION)
-    private dislikesIncrementation!: (index:number) => void;
+    @GalleryModule.Action(galleryActions.DISLIKES_INCREMENTATION)
+    private dislikesIncrementation!: (index: number) => void;
 
-    @galleryModule.Action(galleryActions.LIKES_DECREMENT)
-    private likesDecrement!: (index:number) => void;
+    @GalleryModule.Action(galleryActions.LIKES_DECREMENT)
+    private likesDecrement!: (index: number) => void;
 
-    @galleryModule.Action(galleryActions.DISLIKES_DECREMENT)
-    private dislikesDecrement!: (index:number) => void;
+    @GalleryModule.Action(galleryActions.DISLIKES_DECREMENT)
+    private dislikesDecrement!: (index: number) => void;
 
-    @galleryModule.Action(galleryActions.UPDATE_LOCAL_STORAGE)
+    @GalleryModule.Action(galleryActions.UPDATE_LOCAL_STORAGE)
     private updateLocalStorage!: () => void;
 
-    @galleryModule.Action(galleryActions.COMMENT_INCREMENT)
-    private commentIncrement!: (commentData:object) => void;
+    @GalleryModule.Action(galleryActions.COMMENT_INCREMENT)
+    private commentIncrement!: (commentData: object) => void;
 
-    protected like():void {
+    protected like(): void {
       if (!this.userActivity.liked) {
         this.likesIncrementation(this.itemIndex);
         this.userActivity.liked = !this.userActivity.liked;
@@ -106,7 +106,7 @@ export default class ImagePopup extends Vue {
       this.updateLocalStorage();
     }
 
-    protected dislike():void {
+    protected dislike(): void {
       if (!this.userActivity.disliked) {
         this.dislikesIncrementation(this.itemIndex);
         this.userActivity.disliked = !this.userActivity.disliked;
@@ -116,14 +116,14 @@ export default class ImagePopup extends Vue {
       this.updateLocalStorage();
     }
 
-    protected unLike() {
+    protected unLike(): void {
       if (this.userActivity.liked) {
         this.likesDecrement(this.itemIndex);
         this.userActivity.liked = !this.userActivity.liked;
       }
     }
 
-    protected unDislike() {
+    protected unDislike(): void {
       if (this.userActivity.disliked) {
         this.dislikesDecrement(this.itemIndex);
         this.userActivity.disliked = !this.userActivity.disliked;
@@ -131,20 +131,19 @@ export default class ImagePopup extends Vue {
     }
 
     @Emit('close')
-    private close():void {
+    private close(): void {
       this.userActivity = {
         liked: false,
         disliked: false,
       };
-      // this.$emit('update:opened', false);
     }
 
-    private clearInputs():void {
+    private clearInputs(): void {
       this.userName = '';
       this.commentText = '';
     }
 
-    private sendComment():void {
+    private sendComment(): void {
       const commentData = {
         itemIndex: this.itemIndex,
         comment: {
@@ -159,7 +158,7 @@ export default class ImagePopup extends Vue {
       this.updateLocalStorage();
     }
 
-    protected getDate(commentDate:Date):string {
+    protected getDate(commentDate:Date): string {
       return moment(commentDate.toString()).fromNow();
     }
 }
