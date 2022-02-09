@@ -89,7 +89,10 @@
 
   &.alreadyAdded {
     border: 2px solid $comment-border-focused-colour;
-    pointer-events: none;
+
+    .plusButton {
+      transform: rotate(45deg);
+    }
   }
 
   &.newAdded {
