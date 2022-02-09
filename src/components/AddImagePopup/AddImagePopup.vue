@@ -15,11 +15,15 @@
           )
 
       .addImagePopup__imagesWrapper.border-box(
-        :class="{ 'addImagePopup__imagesWrapper_centered': showDisclaimer }"
+        :class="{ 'addImagePopup__imagesWrapper_centered': showDisclaimer || showLoader }"
       )
         .addImagePopup__disclaimer(
-          v-show="showDisclaimer"
+          v-if="showDisclaimer"
         ) There will be your images
+
+        Loader(
+          v-if="showLoader"
+        )
 
         .addImagePopup__imageContainer.border-box(
           v-if="getAllImages.length"
@@ -51,11 +55,17 @@ import { galleryActions, galleryGetters } from '@/store/modules/gallery/publicCo
 import { INewImage } from '@/interfaces/flickr';
 import { IGalleryItem } from '@/interfaces/gallery';
 
+import Loader from '@/components/Loader/Loader.vue';
+
 const AddImagePopupModule = namespace('addImagePopupModule');
 
 const GalleryModule = namespace('galleryModule');
 
-  @Component
+@Component({
+  components: {
+    Loader,
+  },
+})
 export default class AddImagePopup extends Vue {
     @Prop() private opened!: boolean;
 
@@ -68,10 +78,12 @@ export default class AddImagePopup extends Vue {
 
     protected showDisclaimer: boolean = true;
 
+    protected showLoader: boolean = false;
+
     protected keyWord:string = '';
 
     @AddImagePopupModule.Action(popupActions.UPLOAD_IMAGES)
-    private uploadImagesAction!: (keyWord: string) => void;
+    private uploadImagesAction!: (keyWord: string) => boolean;
 
     @AddImagePopupModule.Action(popupActions.CLEAR_IMAGES_POPUP)
     private clearImages!: () => void;
@@ -99,14 +111,17 @@ export default class AddImagePopup extends Vue {
     private deleteImageBySrc!: (src: string) => void;
     // gallery module functionality
 
-    private uploadImages(keyWord: string): void {
+    private async uploadImages(keyWord: string): Promise<void> {
+      this.clearImages();
+
       if (!keyWord) {
         alert('The search string shouldn`t be empty');
         return;
       }
-
-      this.uploadImagesAction(keyWord);
       this.showDisclaimer = false;
+      this.showLoader = true;
+
+      this.showLoader = !await this.uploadImagesAction(keyWord);
       this.keyWord = '';
     }
 
