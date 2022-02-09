@@ -24,7 +24,7 @@
         .addImagePopup__imageContainer.border-box(
           v-if="getAllImages.length"
           v-for="(item, index) in getAllImages"
-          :class="{'alreadyAdded': isBelongToGallery(item.src) && !item.added,'newAdded': item.added}"
+          :class="{'alreadyAdded': isBelongToGallery(item.src) && !item.added, 'newAdded': item.added}"
         )
           img(
             :src='item.src'
@@ -34,7 +34,7 @@
           img(
             src='~@/assets/media/images/AddButton/plus_icon.png'
             class='plusButton'
-            @click="addImage(item.src, index)"
+            @click="updateImageState(item.src, index)"
           )
       img.popup__closeButton(
         src='~@/assets/media/images/ImagePopup/close_icon.png'
@@ -62,6 +62,7 @@ export default class AddImagePopup extends Vue {
     @Emit('close')
     private close(): boolean {
       this.clearImages();
+      this.showDisclaimer = true;
       return false;
     }
 
@@ -77,6 +78,9 @@ export default class AddImagePopup extends Vue {
 
     @AddImagePopupModule.Action(popupActions.SET_AS_ADDED)
     private setAsAdded!: (id: number) => void;
+
+    @AddImagePopupModule.Action(popupActions.SET_AS_DEFAULT)
+    private setAsDefault!: (id: number) => void;
 
     @AddImagePopupModule.Getter(popupGetters.GET_UPLOADED_IMAGES)
     private getAllImages!: INewImage[];
@@ -106,15 +110,19 @@ export default class AddImagePopup extends Vue {
       this.keyWord = '';
     }
 
-    private addImage(src: string, index: number): void {
-      if (!this.getAllImages[index].added) {
-        this.addImageToGallery(src);
-        this.setAsAdded(index);
-      } else {
-        this.deleteImageBySrc(src);
-        this.setAsAdded(index);
-      }
+    private updateImageState(src: string, index: number): void {
+      !this.isBelongToGallery(src) ? this.addImage(src, index) : this.deleteImage(src, index);
       this.updateLocalStorage();
+    }
+
+    private addImage(src: string, index: number): void {
+      this.addImageToGallery(src);
+      this.setAsAdded(index);
+    }
+
+    private deleteImage(src: string, index: number): void {
+      this.deleteImageBySrc(src);
+      this.setAsDefault(index);
     }
 
     private isBelongToGallery(src: string) {
