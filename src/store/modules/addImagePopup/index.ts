@@ -30,7 +30,10 @@ const actions: ActionTree<IAddImagePopupState, IRootState> = {
     commit('CLEAR_IMAGES');
   },
   [popupActions.SET_AS_ADDED]: ({ commit }, payload) => {
-    commit('ADD_IMAGE', payload);
+    commit('SET_AS_ADDED', payload);
+  },
+  [popupActions.SET_AS_DEFAULT]: ({ commit }, payload) => {
+    commit('SET_AS_DEFAULT', payload);
   },
 };
 
@@ -41,8 +44,11 @@ const mutations: MutationTree<IAddImagePopupState> = {
   [popupMutations.CLEAR_IMAGES]: (state) => {
     state.images = [];
   },
-  [popupMutations.ADD_IMAGE]: (state, payload) => {
-    state.images[payload].added = !state.images[payload].added;
+  [popupMutations.SET_AS_ADDED]: (state, payload) => {
+    state.images[payload].added = true;
+  },
+  [popupMutations.SET_AS_DEFAULT]: (state, payload) => {
+    state.images[payload].added = false;
   },
 };
 
