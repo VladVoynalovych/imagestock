@@ -78,8 +78,6 @@ export default class AddImagePopup extends Vue {
 
     protected showDisclaimer: boolean = true;
 
-    protected showLoader: boolean = false;
-
     protected keyWord:string = '';
 
     @AddImagePopupModule.Action(popupActions.UPLOAD_IMAGES)
@@ -111,6 +109,10 @@ export default class AddImagePopup extends Vue {
     private deleteImageBySrc!: (src: string) => void;
     // gallery module functionality
 
+    get showLoader() {
+      return !this.showDisclaimer && !this.getAllImages.length;
+    }
+
     private async uploadImages(keyWord: string): Promise<void> {
       this.clearImages();
 
@@ -119,9 +121,7 @@ export default class AddImagePopup extends Vue {
         return;
       }
       this.showDisclaimer = false;
-      this.showLoader = true;
-
-      this.showLoader = !await this.uploadImagesAction(keyWord);
+      await this.uploadImagesAction(keyWord);
       this.keyWord = '';
     }
 
