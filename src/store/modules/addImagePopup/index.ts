@@ -25,6 +25,8 @@ const actions: ActionTree<IAddImagePopupState, IRootState> = {
   [popupActions.UPLOAD_IMAGES]: async ({ commit }, payload) => {
     const images = await uploadImages(payload);
     commit('RENEW_IMAGES', images);
+
+    return !!images;
   },
   [popupActions.CLEAR_IMAGES_POPUP]: ({ commit }) => {
     commit('CLEAR_IMAGES');
